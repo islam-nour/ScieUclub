@@ -202,6 +202,16 @@ function subscribeToRegistrations() {
     },
     (error) => {
       console.error(error);
+      if (error.code === "permission-denied") {
+        const email = auth.currentUser?.email || "هذا الحساب";
+        showMessage(
+          adminMessage,
+          "error",
+          `تعذر تحميل التسجيلات لأن ${email} غير مسموح له في قواعد Firestore. استعمل admin@scieuclub.com أو أضف هذا البريد إلى firestore.rules ثم انشر القواعد.`
+        );
+        return;
+      }
+
       showMessage(adminMessage, "error", "تعذر تحميل التسجيلات. تحقق من إعدادات Firebase والصلاحيات.");
     }
   );

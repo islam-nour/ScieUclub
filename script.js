@@ -1,13 +1,10 @@
 import { addDoc, collection, db, serverTimestamp } from "./firebase.js";
 
-const WHATSAPP_NUMBER = "0554660086";
+const WHATSAPP_NUMBER = "0659959504";
 const PROGRAM_START_DATE = new Date("2026-07-04T00:00:00");
 const PHONE_ALLOWED_PATTERN = /^[0-9\u0660-\u0669\u06f0-\u06f9+\s()-]+$/;
 const PHONE_DIGIT_PATTERN = /[0-9\u0660-\u0669\u06f0-\u06f9]/g;
 
-const landingPage = document.querySelector("#landingPage");
-const formPage = document.querySelector("#formPage");
-const startRegistrationButton = document.querySelector("#startRegistrationButton");
 const form = document.querySelector("#registrationForm");
 const formMessage = document.querySelector("#formMessage");
 const successPage = document.querySelector("#successPage");
@@ -24,18 +21,6 @@ const conditionalRules = [
 
 function getRadioValue(name) {
   return form.querySelector(`input[name="${name}"]:checked`)?.value || "";
-}
-
-function setRegistrationMode(isActive) {
-  document.body.classList.toggle("registration-mode", isActive);
-}
-
-function showRegistrationForm() {
-  landingPage.classList.add("hidden");
-  formPage.classList.remove("hidden");
-  setRegistrationMode(true);
-  history.replaceState(null, "", "#registration");
-  formPage.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function showMessage(type, text) {
@@ -217,9 +202,6 @@ function setupWhatsappButton() {
 
   whatsappButton.addEventListener("click", (event) => {
     event.preventDefault();
-    if (formPage.classList.contains("hidden")) {
-      showRegistrationForm();
-    }
     showMessage("error", "يرجى إضافة رقم واتساب الصحيح داخل ملف script.js.");
   });
 }
@@ -229,8 +211,6 @@ conditionalRules.forEach(({ radioName }) => {
     radio.addEventListener("change", updateConditionalFields);
   });
 });
-
-startRegistrationButton.addEventListener("click", showRegistrationForm);
 
 birthDateInput.addEventListener("change", () => {
   const calculatedAge = calculateAgeAtProgramStart(birthDateInput.value);
@@ -259,12 +239,6 @@ form.addEventListener("submit", async (event) => {
     setButtonLoading(false);
   }
 });
-
-if (window.location.hash === "#registration") {
-  landingPage.classList.add("hidden");
-  formPage.classList.remove("hidden");
-  setRegistrationMode(true);
-}
 
 setupPhoneGuards();
 updateConditionalFields();
