@@ -1,0 +1,1096 @@
+:root {
+  --orange: #f59e0b;
+  --orange-dark: #d97706;
+  --blue: #0f3d91;
+  --blue-strong: #08265f;
+  --ink: #172033;
+  --muted: #637083;
+  --line: #d8dee9;
+  --surface: #ffffff;
+  --soft: #f5f8fc;
+  --success: #12805c;
+  --success-bg: #e9f8f1;
+  --danger: #c2413b;
+  --danger-bg: #fff1f0;
+  --shadow: 0 18px 45px rgba(15, 61, 145, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent 34rem),
+    linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  font-family: "Cairo", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+body.registration-mode {
+  background:
+    linear-gradient(180deg, rgba(248, 251, 255, 0.9), rgba(255, 251, 242, 0.84)),
+    url("assets/registration-form-background.png") center top / cover fixed no-repeat;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.landing-page {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #f6f2eb;
+}
+
+.landing-picture {
+  display: block;
+  width: 100%;
+  height: 100svh;
+}
+
+.landing-image {
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.landing-register-button {
+  position: absolute;
+  top: clamp(18px, 3.2vw, 42px);
+  right: clamp(16px, 4vw, 56px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: clamp(150px, 18vw, 260px);
+  min-height: clamp(52px, 6vw, 82px);
+  padding: 12px clamp(20px, 3vw, 34px);
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--orange), #fb8500);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 18px 36px rgba(245, 158, 11, 0.32);
+  font-size: clamp(1.05rem, 2.2vw, 2rem);
+  font-weight: 800;
+  cursor: pointer;
+  animation: landingButtonFloat 2.7s ease-in-out infinite;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  will-change: transform;
+}
+
+.landing-register-button:hover,
+.landing-register-button:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-2px);
+  box-shadow: 0 22px 42px rgba(245, 158, 11, 0.38);
+  outline: 0;
+}
+
+.button-person-icon {
+  position: relative;
+  width: 1.05em;
+  height: 1.05em;
+  flex: 0 0 auto;
+}
+
+.button-person-icon::before,
+.button-person-icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+}
+
+.button-person-icon::before {
+  top: 0;
+  width: 0.46em;
+  height: 0.46em;
+  border-radius: 50%;
+}
+
+.button-person-icon::after {
+  bottom: 0;
+  width: 0.82em;
+  height: 0.48em;
+  border-radius: 0.44em 0.44em 0.12em 0.12em;
+}
+
+.page-shell,
+.admin-shell {
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+}
+
+.site-header,
+.admin-topbar {
+  padding: 22px 0 16px;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.registration-hero {
+  border-bottom: 1px solid rgba(15, 61, 145, 0.12);
+}
+
+.registration-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  direction: ltr;
+  gap: clamp(12px, 3vw, 32px);
+}
+
+.registration-hero-grid .brand-logo {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  justify-self: center;
+  width: clamp(76px, 8vw, 104px);
+  height: clamp(76px, 8vw, 104px);
+}
+
+.registration-title-block {
+  display: contents;
+}
+
+.registration-title-block .brand-name {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  justify-self: start;
+  align-self: center;
+  color: #3d4148;
+  font-size: clamp(1.65rem, 4.4vw, 3rem);
+  line-height: 1;
+}
+
+.registration-title-block h1 {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  align-self: end;
+  direction: rtl;
+  text-align: right;
+}
+
+.registration-title-block .subtitle {
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: end;
+  align-self: start;
+  direction: rtl;
+  text-align: right;
+}
+
+.brand-logo,
+.login-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 12px 28px rgba(15, 61, 145, 0.18);
+}
+
+.brand-name {
+  margin: 0 0 2px;
+  color: var(--orange-dark);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+.site-header h1,
+.admin-topbar h1 {
+  margin-bottom: 2px;
+  color: var(--blue);
+  font-size: clamp(1.55rem, 4vw, 2.5rem);
+  font-weight: 800;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.program-banner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 20px 0 22px;
+}
+
+.banner-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 78px;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(216, 222, 233, 0.72);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(15, 61, 145, 0.12);
+  backdrop-filter: blur(8px);
+  animation: fadeInUp 0.55s ease both;
+}
+
+.banner-item span {
+  flex: 0 0 auto;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.banner-item p {
+  margin: 0;
+  font-size: clamp(0.98rem, 1.9vw, 1.22rem);
+  font-weight: 800;
+  text-align: center;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: start;
+  padding-bottom: 28px;
+}
+
+.form-main {
+  width: min(880px, 100%);
+  margin: 0 auto;
+  padding-bottom: 28px;
+}
+
+.registration-card,
+.success-card,
+.admin-card,
+.visual-panel,
+.modal-card {
+  background: var(--surface);
+  border: 1px solid rgba(216, 222, 233, 0.9);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.registration-card,
+.success-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.registration-card {
+  position: relative;
+  overflow: hidden;
+  padding: 16px;
+  animation: fadeInUp 0.65s ease both;
+}
+
+.registration-card::before {
+  content: "ScieUClub";
+  position: absolute;
+  inset: 32px 0 auto;
+  z-index: 0;
+  color: rgba(15, 61, 145, 0.055);
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.registration-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.form-section {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.form-section:first-of-type {
+  padding-top: 0;
+}
+
+.form-section:last-of-type {
+  border-bottom: 0;
+}
+
+.section-heading,
+.admin-card-heading,
+.modal-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.section-heading {
+  justify-content: flex-start;
+}
+
+.section-number {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: #ffffff;
+  background: var(--orange);
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.section-heading h2,
+.admin-card-heading h2,
+.modal-heading h2 {
+  margin: 0;
+  color: var(--blue-strong);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.form-grid,
+.filter-grid,
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 13px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field span,
+.choice-group legend {
+  color: var(--ink);
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.field small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 12px;
+  color: var(--ink);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.16);
+}
+
+.choice-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.choice-group legend {
+  grid-column: 1 / -1;
+  padding: 0;
+}
+
+.choice-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px;
+  color: var(--blue);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.choice-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.choice-card:has(input:checked) {
+  color: #ffffff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.choice-card:hover {
+  transform: translateY(-1px);
+}
+
+.conditional-field {
+  animation: fadeInUp 0.28s ease both;
+}
+
+.consent-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.consent-box input {
+  width: 20px;
+  height: 20px;
+  margin-top: 7px;
+  accent-color: var(--orange);
+}
+
+.submit-button,
+.ghost-button,
+.secondary-link,
+.table-button,
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.submit-button {
+  width: 100%;
+  min-height: 56px;
+  margin-top: 16px;
+  padding: 14px 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  box-shadow: 0 14px 30px rgba(245, 158, 11, 0.26);
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+
+.submit-button:hover,
+.ghost-button:hover,
+.secondary-link:hover,
+.table-button:hover,
+.icon-button:hover {
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  opacity: 0.68;
+  cursor: progress;
+  transform: none;
+}
+
+.form-message {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  animation: fadeInUp 0.25s ease both;
+}
+
+.form-message.error {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border: 1px solid rgba(194, 65, 59, 0.25);
+}
+
+.form-message.success {
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid rgba(18, 128, 92, 0.25);
+}
+
+.success-card {
+  padding: 28px 18px;
+  text-align: center;
+  animation: fadeInUp 0.45s ease both;
+}
+
+.success-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  margin-bottom: 16px;
+  color: #ffffff;
+  background: var(--success);
+  border-radius: 50%;
+  font-size: 2.5rem;
+  font-weight: 800;
+  box-shadow: 0 15px 30px rgba(18, 128, 92, 0.24);
+}
+
+.success-card h2 {
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-size: 1.6rem;
+}
+
+.success-card p {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.secondary-link,
+.ghost-button {
+  min-height: 42px;
+  padding: 9px 14px;
+  color: var(--blue);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  font-weight: 800;
+}
+
+.secondary-link {
+  margin-top: 12px;
+}
+
+.visual-panel {
+  overflow: hidden;
+  padding: 8px;
+  animation: fadeInUp 0.78s ease both;
+}
+
+.visual-panel img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.whatsapp-float {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  color: #ffffff;
+  background: #1fa855;
+  border-radius: 50%;
+  box-shadow: 0 14px 34px rgba(31, 168, 85, 0.34);
+  text-decoration: none;
+  animation: pulse 2.4s infinite;
+}
+
+.whatsapp-float span {
+  font-size: 1.55rem;
+  transform: rotate(-18deg);
+}
+
+.site-footer {
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 8px 0 28px;
+  text-align: center;
+}
+
+.site-footer a {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.admin-body {
+  background:
+    radial-gradient(circle at top left, rgba(245, 158, 11, 0.1), transparent 30rem),
+    linear-gradient(180deg, #f7faff 0%, #ffffff 100%);
+}
+
+.admin-login {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  padding: 22px 0;
+}
+
+.compact-card {
+  width: min(430px, 100%);
+  padding: 22px;
+  text-align: center;
+}
+
+.login-logo {
+  margin: 0 auto 12px;
+}
+
+.compact-card h1 {
+  margin-bottom: 4px;
+  color: var(--blue);
+  font-size: 1.75rem;
+}
+
+.compact-card p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.login-hint {
+  margin-top: -8px;
+  padding: 10px 12px;
+  color: var(--blue-strong);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.admin-dashboard {
+  padding-bottom: 32px;
+  animation: fadeInUp 0.35s ease both;
+}
+
+.admin-topbar {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-actions,
+.export-actions,
+.row-actions,
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.stat-card span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.stat-card strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--blue);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.admin-card {
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.table-status {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.registrations-table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+}
+
+.registrations-table th,
+.registrations-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  vertical-align: middle;
+}
+
+.registrations-table th {
+  color: var(--blue-strong);
+  background: var(--soft);
+  font-weight: 800;
+}
+
+.registrations-table tbody tr:hover {
+  background: #fbfcff;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.status-pill.success {
+  color: var(--success);
+  background: var(--success-bg);
+}
+
+.status-pill.neutral {
+  color: var(--muted);
+  background: var(--soft);
+}
+
+.table-button {
+  min-height: 34px;
+  padding: 7px 10px;
+  color: var(--blue);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.table-button.danger {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border-color: rgba(194, 65, 59, 0.2);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(8, 38, 95, 0.58);
+}
+
+.modal-card {
+  width: min(900px, 100%);
+  max-height: min(88vh, 900px);
+  overflow-y: auto;
+  padding: 16px;
+  animation: fadeInUp 0.26s ease both;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+  color: var(--blue);
+  background: var(--soft);
+  border: 1px solid var(--line);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.modal-actions {
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes landingButtonFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 720px) {
+  .landing-page {
+    align-content: start;
+    padding: clamp(82px, 18svh, 128px) 10px 24px;
+  }
+
+  .landing-picture {
+    height: auto;
+  }
+
+  .landing-image {
+    width: min(100%, 560px);
+    height: auto;
+    min-height: 0;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  .landing-register-button {
+    top: 16px;
+    right: 50%;
+    min-width: min(70vw, 220px);
+    translate: 50% 0;
+  }
+
+  .registration-hero-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 8px;
+    direction: rtl;
+    text-align: center;
+  }
+
+  .registration-hero-grid .brand-logo {
+    grid-column: auto;
+    grid-row: auto;
+    width: 72px;
+    height: 72px;
+  }
+
+  .registration-title-block {
+    display: block;
+  }
+
+  .registration-title-block .brand-name,
+  .registration-title-block h1,
+  .registration-title-block .subtitle {
+    grid-column: auto;
+    grid-row: auto;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .registration-title-block .brand-name {
+    margin-bottom: 8px;
+    font-size: 1.75rem;
+  }
+
+  .program-banner {
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .banner-item {
+    justify-content: flex-start;
+    min-height: 64px;
+    padding: 12px;
+  }
+
+  .banner-item p {
+    text-align: right;
+  }
+}
+
+@media (min-width: 620px) {
+  .program-banner,
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-grid,
+  .filter-grid,
+  .modal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .field-wide {
+    grid-column: 1 / -1;
+  }
+
+  .registration-card,
+  .admin-card,
+  .modal-card {
+    padding: 22px;
+  }
+}
+
+@media (min-width: 900px) {
+  .site-header,
+  .admin-topbar {
+    padding-top: 28px;
+  }
+
+  .program-banner {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .main-grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.72fr);
+    gap: 22px;
+  }
+
+  .visual-panel {
+    position: sticky;
+    top: 18px;
+  }
+
+  .admin-topbar {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .admin-actions {
+    justify-content: flex-end;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .page-shell,
+  .admin-shell,
+  .site-footer {
+    width: min(100% - 18px, 1180px);
+  }
+
+  .landing-image {
+    object-position: center;
+  }
+
+  .landing-register-button {
+    min-width: 138px;
+    min-height: 48px;
+    gap: 9px;
+  }
+
+  .brand-logo,
+  .login-logo {
+    width: 58px;
+    height: 58px;
+  }
+
+  .program-banner {
+    padding: 9px;
+  }
+
+  .registration-card,
+  .admin-card,
+  .compact-card,
+  .modal-card {
+    padding: 14px;
+  }
+
+  .choice-group {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-card-heading,
+  .modal-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .export-actions,
+  .modal-actions {
+    width: 100%;
+  }
+
+  .export-actions .ghost-button,
+  .modal-actions .ghost-button,
+  .modal-actions .submit-button {
+    flex: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .compact-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

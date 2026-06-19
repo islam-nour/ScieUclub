@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="استمارة التسجيل في برنامج Fun Learning English 2026 من ScieUClub.">
+    <title>استمارة التسجيل | ScieUClub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/scieuclub-logo.jpg">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <section id="landingPage" class="landing-page" aria-label="برنامج Fun Learning English 2026">
+      <picture class="landing-picture">
+        <source srcset="assets/hero-program.png" media="(max-width: 720px)">
+        <img src="assets/landing-responsive-showcase.png" alt="Fun Learning English 2026 ScieUClub" class="landing-image">
+      </picture>
+      <button id="startRegistrationButton" class="landing-register-button" type="button">
+        <span class="button-person-icon" aria-hidden="true"></span>
+        سجل الآن
+      </button>
+    </section>
+
+    <div id="formPage" class="page-shell hidden">
+      <header class="site-header registration-hero">
+        <div class="brand-lockup registration-hero-grid">
+          <img src="assets/scieuclub-logo.jpg" alt="ScieUClub" class="brand-logo">
+          <div class="registration-title-block">
+            <p class="brand-name">ScieUClub</p>
+            <h1>استمارة التسجيل</h1>
+            <p class="subtitle">برنامج Fun Learning English 2026</p>
+          </div>
+        </div>
+      </header>
+
+      <section class="program-banner" aria-label="معلومات البرنامج">
+        <div class="banner-item">
+          <span aria-hidden="true">📅</span>
+          <p>من 04 جويلية 2026 إلى 30 جويلية 2026</p>
+        </div>
+        <div class="banner-item">
+          <span aria-hidden="true">👦</span>
+          <p>الفئة العمرية: 6 - 13 سنة</p>
+        </div>
+        <div class="banner-item">
+          <span aria-hidden="true">🏊</span>
+          <p>تتضمن الدورة أنشطة سباحة</p>
+        </div>
+        <div class="banner-item">
+          <span aria-hidden="true">🧪</span>
+          <p>تجارب علمية</p>
+        </div>
+        <div class="banner-item">
+          <span aria-hidden="true">🎮</span>
+          <p>ألعاب تعليمية</p>
+        </div>
+        <div class="banner-item">
+          <span aria-hidden="true">📚</span>
+          <p>تنمية المهارات اللغوية</p>
+        </div>
+      </section>
+
+      <main class="form-main">
+        <section id="successPage" class="success-card hidden" aria-live="polite">
+          <div class="success-mark" aria-hidden="true">✓</div>
+          <h2>تم إرسال التسجيل بنجاح</h2>
+          <p>شكرا لتسجيلكم في برنامج Fun Learning English 2026.</p>
+          <p>سنتواصل معكم قريبا.</p>
+          <a class="secondary-link" href="index.html">تسجيل طفل آخر</a>
+        </section>
+
+        <form id="registrationForm" class="registration-card" novalidate>
+          <div id="formMessage" class="form-message hidden" role="alert"></div>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <span class="section-number">1</span>
+              <h2>معلومات ولي الأمر</h2>
+            </div>
+            <div class="form-grid">
+              <label class="field">
+                <span>الاسم</span>
+                <input type="text" name="parentFirstName" autocomplete="given-name" required>
+              </label>
+              <label class="field">
+                <span>اللقب</span>
+                <input type="text" name="parentLastName" autocomplete="family-name" required>
+              </label>
+              <label class="field">
+                <span>رقم الهاتف</span>
+                <input type="tel" name="parentPhone" inputmode="tel" autocomplete="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم هاتف صحيح بدون حروف" required>
+              </label>
+              <label class="field">
+                <span>رقم واتساب</span>
+                <input type="tel" name="parentWhatsapp" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم واتساب صحيح بدون حروف" required>
+              </label>
+              <label class="field">
+                <span>البريد الإلكتروني <small>اختياري</small></span>
+                <input type="email" name="parentEmail" autocomplete="email">
+              </label>
+              <label class="field field-wide">
+                <span>العنوان</span>
+                <textarea name="parentAddress" rows="3" required></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <span class="section-number">2</span>
+              <h2>معلومات الطفل</h2>
+            </div>
+            <div class="form-grid">
+              <label class="field">
+                <span>اسم الطفل</span>
+                <input type="text" name="childFirstName" required>
+              </label>
+              <label class="field">
+                <span>لقب الطفل</span>
+                <input type="text" name="childLastName" required>
+              </label>
+              <label class="field">
+                <span>تاريخ الميلاد</span>
+                <input type="date" name="birthDate" min="2012-07-05" max="2020-07-04" required>
+              </label>
+              <label class="field">
+                <span>العمر</span>
+                <input type="number" name="age" min="6" max="13" inputmode="numeric" required>
+              </label>
+              <fieldset class="choice-group">
+                <legend>الجنس</legend>
+                <label class="choice-card">
+                  <input type="radio" name="gender" value="ذكر" required>
+                  <span>ذكر</span>
+                </label>
+                <label class="choice-card">
+                  <input type="radio" name="gender" value="أنثى" required>
+                  <span>أنثى</span>
+                </label>
+              </fieldset>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <span class="section-number">3</span>
+              <h2>المعلومات الصحية</h2>
+            </div>
+            <div class="form-grid">
+              <label class="field">
+                <span>فصيلة الدم</span>
+                <select name="bloodType" required>
+                  <option value="">اختر فصيلة الدم</option>
+                  <option>A+</option>
+                  <option>A-</option>
+                  <option>B+</option>
+                  <option>B-</option>
+                  <option>AB+</option>
+                  <option>AB-</option>
+                  <option>O+</option>
+                  <option>O-</option>
+                </select>
+              </label>
+
+              <fieldset class="choice-group">
+                <legend>هل يعاني من حساسية؟</legend>
+                <label class="choice-card">
+                  <input type="radio" name="hasAllergy" value="yes" required data-conditional="allergyTypeField">
+                  <span>نعم</span>
+                </label>
+                <label class="choice-card">
+                  <input type="radio" name="hasAllergy" value="no" required data-conditional="allergyTypeField">
+                  <span>لا</span>
+                </label>
+              </fieldset>
+              <label id="allergyTypeField" class="field field-wide conditional-field hidden">
+                <span>نوع الحساسية</span>
+                <input type="text" name="allergyType">
+              </label>
+
+              <fieldset class="choice-group">
+                <legend>هل يعاني من مرض مزمن؟</legend>
+                <label class="choice-card">
+                  <input type="radio" name="hasChronicDisease" value="yes" required data-conditional="chronicDiseaseField">
+                  <span>نعم</span>
+                </label>
+                <label class="choice-card">
+                  <input type="radio" name="hasChronicDisease" value="no" required data-conditional="chronicDiseaseField">
+                  <span>لا</span>
+                </label>
+              </fieldset>
+              <label id="chronicDiseaseField" class="field field-wide conditional-field hidden">
+                <span>اسم المرض</span>
+                <input type="text" name="chronicDiseaseName">
+              </label>
+
+              <fieldset class="choice-group">
+                <legend>هل يتناول أدوية حاليا؟</legend>
+                <label class="choice-card">
+                  <input type="radio" name="takesMedication" value="yes" required data-conditional="medicationField">
+                  <span>نعم</span>
+                </label>
+                <label class="choice-card">
+                  <input type="radio" name="takesMedication" value="no" required data-conditional="medicationField">
+                  <span>لا</span>
+                </label>
+              </fieldset>
+              <label id="medicationField" class="field field-wide conditional-field hidden">
+                <span>اسم الدواء</span>
+                <input type="text" name="medicationName">
+              </label>
+
+              <label class="field field-wide">
+                <span>ملاحظات صحية إضافية</span>
+                <textarea name="healthNotes" rows="3"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <span class="section-number">6</span>
+              <h2>معلومات الطوارئ</h2>
+            </div>
+            <div class="form-grid">
+              <label class="field">
+                <span>اسم الشخص المسؤول في حالة الطوارئ</span>
+                <input type="text" name="emergencyName" required>
+              </label>
+              <label class="field">
+                <span>صلة القرابة</span>
+                <input type="text" name="emergencyRelationship" required>
+              </label>
+              <label class="field">
+                <span>رقم هاتف الطوارئ</span>
+                <input type="tel" name="emergencyPhone" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم هاتف صحيح بدون حروف" required>
+              </label>
+              <label class="field">
+                <span>رقم واتساب الطوارئ</span>
+                <input type="tel" name="emergencyWhatsapp" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم واتساب صحيح بدون حروف" required>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <div class="section-heading">
+              <span class="section-number">7</span>
+              <h2>الموافقة</h2>
+            </div>
+            <label class="consent-box">
+              <input type="checkbox" name="consent" required>
+              <span>أقر أن جميع المعلومات المقدمة صحيحة وأوافق على مشاركة ابني في الأنشطة التي ينظمها ScieUClub.</span>
+            </label>
+          </section>
+
+          <button class="submit-button" type="submit">إرسال التسجيل</button>
+        </form>
+      </main>
+    </div>
+
+    <a class="whatsapp-float" href="#" aria-label="تواصل عبر واتساب">
+      <span aria-hidden="true">☎</span>
+    </a>
+
+    <footer class="site-footer">
+      <a href="admin.html">لوحة الإدارة</a>
+    </footer>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>

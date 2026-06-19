@@ -1,0 +1,105 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /registrations/{registrationId} {
+      allow create: if isValidRegistration(request.resource.data);
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null
+        && (
+          request.auth.token.admin == true
+          || request.auth.token.email in ["admin@scieuclub.com"]
+        );
+    }
+
+    function hasRequiredTopLevelFields(data) {
+      return data.keys().hasAll([
+        "program",
+        "parent",
+        "child",
+        "health",
+        "emergency",
+        "consent",
+        "source",
+        "createdAt",
+        "updatedAt"
+      ]);
+    }
+
+    function isNonEmptyString(value, maxLength) {
+      return value is string && value.size() > 0 && value.size() <= maxLength;
+    }
+
+    function isOptionalString(value, maxLength) {
+      return value == null || (value is string && value.size() <= maxLength);
+    }
+
+    function isValidRegistration(data) {
+      return hasRequiredTopLevelFields(data)
+        && data.consent == true
+        && data.createdAt == request.time
+        && data.updatedAt == request.time
+        && isValidProgram(data.program)
+        && data.source == "qr-registration-website"
+        && isValidParent(data.parent)
+        && isValidChild(data.child)
+        && isValidHealth(data.health)
+        && isValidEmergency(data.emergency);
+    }
+
+    function isValidProgram(program) {
+      return program is map
+        && program.name == "Fun Learning English 2026"
+        && program.startDate == "2026-07-04"
+        && program.endDate == "2026-07-30";
+    }
+
+    function isValidParent(parent) {
+      return parent is map
+        && isNonEmptyString(parent.firstName, 80)
+        && isNonEmptyString(parent.lastName, 80)
+        && isNonEmptyString(parent.phone, 40)
+        && isNonEmptyString(parent.whatsapp, 40)
+        && isOptionalString(parent.email, 120)
+        && isNonEmptyString(parent.address, 300);
+    }
+
+    function isValidChild(child) {
+      return child is map
+        && isNonEmptyString(child.firstName, 80)
+        && isNonEmptyString(child.lastName, 80)
+        && isNonEmptyString(child.birthDate, 20)
+        && child.age is int
+        && child.age >= 6
+        && child.age <= 13
+        && child.gender in ["ذكر", "أنثى"];
+    }
+
+    function isValidHealth(health) {
+      return health is map
+        && health.bloodType in ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+        && health.hasAllergy is bool
+        && isOptionalString(health.allergyType, 160)
+        && health.hasChronicDisease is bool
+        && isOptionalString(health.chronicDiseaseName, 160)
+        && health.takesMedication is bool
+        && isOptionalString(health.medicationName, 160)
+        && isOptionalString(health.notes, 600);
+    }
+
+    function isValidEmergency(emergency) {
+      return emergency is map
+        && isNonEmptyString(emergency.name, 120)
+        && isNonEmptyString(emergency.relationship, 80)
+        && isNonEmptyString(emergency.phone, 40)
+        && isNonEmptyString(emergency.whatsapp, 40);
+    }
+  }
+}

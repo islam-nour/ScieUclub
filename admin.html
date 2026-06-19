@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="لوحة إدارة تسجيلات ScieUClub Fun Learning English 2026.">
+    <title>لوحة الإدارة | ScieUClub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/scieuclub-logo.jpg">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="admin-body">
+    <main class="admin-shell">
+      <section id="loginView" class="admin-login">
+        <form id="loginForm" class="admin-card compact-card" novalidate>
+          <img src="assets/scieuclub-logo.jpg" alt="ScieUClub" class="login-logo">
+          <h1>لوحة الإدارة</h1>
+          <p>ScieUClub Registration System</p>
+          <p class="login-hint">Use the Firebase admin account. The rules allow admin@scieuclub.com or a user with an admin claim.</p>
+          <div id="loginMessage" class="form-message hidden" role="alert"></div>
+          <label class="field">
+            <span>البريد الإلكتروني</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span>كلمة المرور</span>
+            <input type="password" name="password" autocomplete="current-password" required>
+          </label>
+          <button class="submit-button" type="submit">دخول</button>
+        </form>
+      </section>
+
+      <section id="dashboardView" class="admin-dashboard hidden">
+        <header class="admin-topbar">
+          <div class="brand-lockup">
+            <img src="assets/scieuclub-logo.jpg" alt="ScieUClub" class="brand-logo">
+            <div>
+              <p class="brand-name">ScieUClub</p>
+              <h1>لوحة التسجيلات</h1>
+              <p class="subtitle">برنامج Fun Learning English 2026</p>
+            </div>
+          </div>
+          <div class="admin-actions">
+            <a class="ghost-button" href="index.html#registration">الاستمارة</a>
+            <button id="logoutButton" class="ghost-button" type="button">خروج</button>
+          </div>
+        </header>
+
+        <div id="adminMessage" class="form-message hidden" role="alert"></div>
+
+        <section class="stats-grid compact-stats" aria-label="إحصائيات التسجيل">
+          <article class="stat-card">
+            <span>إجمالي التسجيلات</span>
+            <strong id="totalRegistrations">0</strong>
+          </article>
+          <article class="stat-card">
+            <span>النتائج المعروضة</span>
+            <strong id="visibleRegistrations">0</strong>
+          </article>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card-heading">
+            <h2>البحث والتصفية</h2>
+            <div class="export-actions">
+              <button id="exportCsvButton" class="ghost-button" type="button">CSV</button>
+              <button id="exportExcelButton" class="ghost-button" type="button">Excel</button>
+            </div>
+          </div>
+          <div class="filter-grid">
+            <label class="field">
+              <span>بحث باسم الطفل</span>
+              <input id="childSearch" type="search" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>بحث برقم هاتف الولي</span>
+              <input id="phoneSearch" type="search" inputmode="tel" autocomplete="off">
+            </label>
+            <label class="field">
+              <span>تصفية حسب العمر</span>
+              <select id="ageFilter">
+                <option value="">كل الأعمار</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="admin-card">
+          <div class="admin-card-heading">
+            <h2>كل التسجيلات</h2>
+            <span id="tableStatus" class="table-status">جاري التحميل...</span>
+          </div>
+          <div class="table-wrap">
+            <table class="registrations-table">
+              <thead>
+                <tr>
+                  <th>الطفل</th>
+                  <th>العمر</th>
+                  <th>الجنس</th>
+                  <th>ولي الأمر</th>
+                  <th>الهاتف</th>
+                  <th>التاريخ</th>
+                  <th>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="registrationsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="editModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+      <form id="editForm" class="modal-card" novalidate>
+        <div class="modal-heading">
+          <h2 id="editModalTitle">تعديل التسجيل</h2>
+          <button id="closeModalButton" class="icon-button" type="button" aria-label="إغلاق">×</button>
+        </div>
+        <div class="modal-grid">
+          <label class="field">
+            <span>اسم الولي</span>
+            <input data-edit="parent.firstName" type="text" required>
+          </label>
+          <label class="field">
+            <span>لقب الولي</span>
+            <input data-edit="parent.lastName" type="text" required>
+          </label>
+          <label class="field">
+            <span>هاتف الولي</span>
+            <input data-edit="parent.phone" type="tel" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم هاتف صحيح بدون حروف" required>
+          </label>
+          <label class="field">
+            <span>واتساب الولي</span>
+            <input data-edit="parent.whatsapp" type="tel" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم واتساب صحيح بدون حروف" required>
+          </label>
+          <label class="field">
+            <span>البريد الإلكتروني</span>
+            <input data-edit="parent.email" type="email">
+          </label>
+          <label class="field field-wide">
+            <span>العنوان</span>
+            <textarea data-edit="parent.address" rows="2" required></textarea>
+          </label>
+          <label class="field">
+            <span>اسم الطفل</span>
+            <input data-edit="child.firstName" type="text" required>
+          </label>
+          <label class="field">
+            <span>لقب الطفل</span>
+            <input data-edit="child.lastName" type="text" required>
+          </label>
+          <label class="field">
+            <span>تاريخ الميلاد</span>
+            <input data-edit="child.birthDate" type="date" required>
+          </label>
+          <label class="field">
+            <span>العمر</span>
+            <input data-edit="child.age" type="number" min="6" max="13" required>
+          </label>
+          <label class="field">
+            <span>الجنس</span>
+            <select data-edit="child.gender" required>
+              <option value="ذكر">ذكر</option>
+              <option value="أنثى">أنثى</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>فصيلة الدم</span>
+            <select data-edit="health.bloodType" required>
+              <option>A+</option>
+              <option>A-</option>
+              <option>B+</option>
+              <option>B-</option>
+              <option>AB+</option>
+              <option>AB-</option>
+              <option>O+</option>
+              <option>O-</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>حساسية</span>
+            <select data-edit="health.hasAllergy" required>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>نوع الحساسية</span>
+            <input data-edit="health.allergyType" type="text">
+          </label>
+          <label class="field">
+            <span>مرض مزمن</span>
+            <select data-edit="health.hasChronicDisease" required>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>اسم المرض</span>
+            <input data-edit="health.chronicDiseaseName" type="text">
+          </label>
+          <label class="field">
+            <span>أدوية حاليا</span>
+            <select data-edit="health.takesMedication" required>
+              <option value="true">نعم</option>
+              <option value="false">لا</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>اسم الدواء</span>
+            <input data-edit="health.medicationName" type="text">
+          </label>
+          <label class="field field-wide">
+            <span>ملاحظات صحية</span>
+            <textarea data-edit="health.notes" rows="2"></textarea>
+          </label>
+          <label class="field">
+            <span>مسؤول الطوارئ</span>
+            <input data-edit="emergency.name" type="text" required>
+          </label>
+          <label class="field">
+            <span>صلة القرابة</span>
+            <input data-edit="emergency.relationship" type="text" required>
+          </label>
+          <label class="field">
+            <span>هاتف الطوارئ</span>
+            <input data-edit="emergency.phone" type="tel" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم هاتف صحيح بدون حروف" required>
+          </label>
+          <label class="field">
+            <span>واتساب الطوارئ</span>
+            <input data-edit="emergency.whatsapp" type="tel" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم واتساب صحيح بدون حروف" required>
+          </label>
+        </div>
+        <div class="modal-actions">
+          <button class="ghost-button" type="button" id="cancelEditButton">إلغاء</button>
+          <button class="submit-button" type="submit">حفظ التعديل</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>
