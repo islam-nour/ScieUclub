@@ -315,10 +315,6 @@ function toExportRow(registration) {
     "أدوية حاليا": formatBoolean(registration.health?.takesMedication),
     "اسم الدواء": registration.health?.medicationName || "",
     "ملاحظات صحية": registration.health?.notes || "",
-    "مسؤول الطوارئ": registration.emergency?.name || "",
-    "صلة القرابة": registration.emergency?.relationship || "",
-    "هاتف الطوارئ": registration.emergency?.phone || "",
-    "واتساب الطوارئ": registration.emergency?.whatsapp || "",
     "تاريخ التسجيل": formatTimestamp(registration.createdAt)
   };
 }

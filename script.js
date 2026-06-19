@@ -176,12 +176,6 @@ function buildRegistrationPayload() {
       medicationName: takesMedication ? data.get("medicationName").trim() : "",
       notes: data.get("healthNotes").trim()
     },
-    emergency: {
-      name: data.get("emergencyName").trim(),
-      relationship: data.get("emergencyRelationship").trim(),
-      phone: data.get("emergencyPhone").trim(),
-      whatsapp: data.get("emergencyWhatsapp").trim()
-    },
     consent: data.get("consent") === "on",
     source: "qr-registration-website",
     createdAt: serverTimestamp(),
