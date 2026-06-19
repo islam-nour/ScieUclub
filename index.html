@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/scieuclub-logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
   <body class="registration-mode">
@@ -22,13 +23,13 @@
             <p class="subtitle">برنامج Fun Learning English 2026</p>
           </div>
         </div>
-      </header>
-
-      <section class="program-banner" aria-label="معلومات البرنامج">
         <div class="banner-item">
           <span aria-hidden="true">📅</span>
           <p>من 04 جويلية 2026 إلى 30 جويلية 2026</p>
         </div>
+      </header>
+
+      <section class="program-banner" aria-label="معلومات البرنامج">
         <div class="banner-item">
           <span aria-hidden="true">👦</span>
           <p>الفئة العمرية: 6 - 13 سنة</p>
@@ -44,6 +45,10 @@
         <div class="banner-item">
           <span aria-hidden="true">🎮</span>
           <p>ألعاب تعليمية</p>
+        </div>
+        <div class="banner-item">
+          <span aria-hidden="true">👨‍🍳</span>
+          <p>ورشات طبخ ممتعة للأطفال</p>
         </div>
         <div class="banner-item">
           <span aria-hidden="true">📚</span>
@@ -208,31 +213,7 @@
             </div>
           </section>
 
-          <section class="form-section">
-            <div class="section-heading">
-              <span class="section-number">6</span>
-              <h2>معلومات الطوارئ</h2>
-            </div>
-            <div class="form-grid">
-              <label class="field">
-                <span>اسم الشخص المسؤول في حالة الطوارئ</span>
-                <input type="text" name="emergencyName" required>
-              </label>
-              <label class="field">
-                <span>صلة القرابة</span>
-                <input type="text" name="emergencyRelationship" required>
-              </label>
-              <label class="field">
-                <span>رقم هاتف الطوارئ</span>
-                <input type="tel" name="emergencyPhone" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم هاتف صحيح بدون حروف" required>
-              </label>
-              <label class="field">
-                <span>رقم واتساب الطوارئ</span>
-                <input type="tel" name="emergencyWhatsapp" inputmode="tel" pattern="[0-9٠-٩۰-۹+()\s-]{8,24}" title="يرجى إدخال رقم واتساب صحيح بدون حروف" required>
-              </label>
-            </div>
-          </section>
-
+        
           <section class="form-section">
             <div class="section-heading">
               <span class="section-number">7</span>
@@ -243,16 +224,45 @@
               <span>أقر أن جميع المعلومات المقدمة صحيحة وأوافق على مشاركة ابني في الأنشطة التي ينظمها ScieUClub.</span>
             </label>
           </section>
-
           <button class="submit-button" type="submit">إرسال التسجيل</button>
         </form>
       </main>
     </div>
+    <section class="contact-section">
+    <h2>📞 تواصل معنا</h2>
+    <p>للاستفسار أو التسجيل، يمكنكم التواصل معنا عبر:</p>
 
-    <a class="whatsapp-float" href="#" aria-label="تواصل عبر واتساب">
-      <span aria-hidden="true">☎</span>
+    <div class="contact-items">
+        <div class="contact-item">
+            📱 <strong>الهاتف:</strong> 0560108114
+        </div>
+
+        <div class="contact-item">
+            📱<strong>الهاتف:</strong> 0675323121
+        </div>
+
+
+        <div class="contact-item">
+            📍 <strong>العنوان:</strong> بني يزجن (غرداية)
+        </div>
+
+        <div class="contact-item facebook">
+    <i class="fa-brands fa-facebook"></i>
+    <strong>Facebook:</strong>
+    <a href="https://facebook.com/ScieUClub" target="_blank">
+        ScieUClub
     </a>
+</div>
 
+        <div class="contact-item instagram">
+    <i class="fa-brands fa-instagram"></i>
+    <strong>Instagram:</strong>
+    <a href="https://instagram.com/scieuclub" target="_blank">
+        @ScieUclub
+    </a>
+</div>
+    </div>
+</section>
     <footer class="site-footer">
       <a href="admin.html">لوحة الإدارة</a>
     </footer>

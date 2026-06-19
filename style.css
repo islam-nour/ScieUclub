@@ -1119,3 +1119,111 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+.contact-section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 40px 30px;
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(15, 61, 145, 0.12);
+    text-align: center;
+    border-top: 6px solid #f59e0b;
+}
+
+.contact-section h2 {
+    color: #0f3d91;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.contact-section p {
+    color: #666;
+    font-size: 1.05rem;
+    margin-bottom: 35px;
+}
+
+.contact-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.contact-item {
+    background: #f8fbff;
+    border: 2px solid #eef3ff;
+    border-radius: 18px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    font-size: 1.05rem;
+    color: #0f3d91;
+    font-weight: 600;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(15, 61, 145, 0.12);
+    border-color: #f59e0b;
+}
+
+.contact-item strong {
+    color: #08265f;
+}
+
+.contact-item a {
+    color: #000000;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.contact-item a:hover {
+    color: #c13584;
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 30px 20px;
+        margin: 40px 15px;
+    }
+
+    .contact-section h2 {
+        font-size: 1.7rem;
+    }
+
+    .contact-items {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-item {
+        padding: 18px;
+    }
+}
+.instagram i {
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.facebook {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.facebook i {
+    font-size: 20px;
+    color: #1877F2; /* Facebook blue */
+}
+
+.facebook a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.facebook a:hover {
+    color: #1877F2;
+}
