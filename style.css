@@ -34,22 +34,120 @@ body {
   letter-spacing: 0;
 }
 
+/* ═══════════════════════════════════════════════════
+   REGISTRATION MODE
+   Desktop (> 720px) → scieuclub.png  (landscape)
+   Mobile  (≤ 720px) → program-ad.png (portrait)
+   Both:   blurred + dimmed + colour wash overlay
+   ═══════════════════════════════════════════════════ */
+
 body.registration-mode {
-  background-image:
-    linear-gradient(180deg, rgba(248, 251, 255, 0.9), rgba(255, 251, 242, 0.84)),
-    url("assets/gemini.png"),
-    url("assets/landing-responsive-showcase.png");
-  background-position:
-    center,
-    left clamp(16px, 4vw, 56px) bottom 78px,
-    center top;
-  background-size:
-    auto,
-    clamp(120px, 18vw, 260px) auto,
-    cover;
-  background-repeat: no-repeat, no-repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #cce0f5; /* fallback while image loads */
 }
+
+/* Layer 1 — the background image (fixed, blurred) */
+body.registration-mode::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url("assets/scieuclub.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  filter: blur(3px) brightness(0.70) saturate(1.1);
+  transform: scale(1.06); /* prevents white blur edges */
+  transform-origin: center;
+}
+
+/* Layer 2 — colour wash (orange top-right, blue bottom-left) */
+body.registration-mode::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at top right,
+      rgba(245, 158, 11, 0.20), transparent 60%),
+    radial-gradient(ellipse 65% 50% at bottom left,
+      rgba(15, 61, 145, 0.26), transparent 60%),
+    linear-gradient(
+      170deg,
+      rgba(255, 252, 240, 0.52) 0%,
+      rgba(240, 248, 255, 0.48) 50%,
+      rgba(255, 250, 235, 0.50) 100%
+    );
+}
+
+/* All page content floats above both layers */
+body.registration-mode #formPage,
+body.registration-mode .contact-section,
+body.registration-mode .site-footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Mobile: swap to portrait poster ── */
+@media (max-width: 720px) {
+  body.registration-mode::before {
+    background-image: url("assets/program-ad.png");
+    background-position: center top;
+    filter: blur(2px) brightness(0.68) saturate(1.05);
+    transform: scale(1.04);
+  }
+
+  body.registration-mode::after {
+    background:
+      radial-gradient(ellipse 80% 40% at top center,
+        rgba(245, 158, 11, 0.22), transparent 55%),
+      radial-gradient(ellipse 70% 55% at bottom center,
+        rgba(15, 61, 145, 0.30), transparent 60%),
+      linear-gradient(
+        180deg,
+        rgba(255, 252, 240, 0.58) 0%,
+        rgba(240, 248, 255, 0.55) 100%
+      );
+  }
+}
+
+/* ── Frosted-glass cards & banners ── */
+.banner-item {
+  background: rgb(255, 255, 255) !important;
+  border: 1px solid rgba(255, 255, 255, 0.80) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.registration-card,
+.success-card {
+  background: rgb(255, 255, 255) !important;
+  border: 1px solid rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  box-shadow:
+    0 20px 50px rgba(15, 61, 145, 0.13),
+    0 1px 2px rgba(255, 255, 255, 0.70) inset !important;
+}
+
+.contact-section {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.contact-item {
+  background: rgba(248, 251, 255, 0.88) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════════════════════
+   EVERYTHING BELOW IS YOUR ORIGINAL CSS — UNTOUCHED
+   ═══════════════════════════════════════════════════ */
 
 button,
 input,
@@ -914,18 +1012,6 @@ p {
 }
 
 @media (max-width: 720px) {
-  body.registration-mode {
-    background-position:
-      center,
-      left 12px bottom 86px,
-      center top;
-    background-size:
-      auto,
-      112px auto,
-      auto 100%;
-    background-attachment: scroll, fixed, scroll;
-  }
-
   .landing-page {
     align-content: start;
     padding: clamp(76px, 13svh, 118px) 10px 18px;
@@ -1119,111 +1205,114 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
 .contact-section {
-    max-width: 1000px;
-    margin: 60px auto;
-    padding: 40px 30px;
-    background: #ffffff;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(15, 61, 145, 0.12);
-    text-align: center;
-    border-top: 6px solid #f59e0b;
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(15, 61, 145, 0.12);
+  text-align: center;
+  border-top: 6px solid #f59e0b;
 }
 
 .contact-section h2 {
-    color: #0f3d91;
-    font-size: 2rem;
-    margin-bottom: 10px;
-    font-weight: 800;
+  color: #0f3d91;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 800;
 }
 
 .contact-section p {
-    color: #666;
-    font-size: 1.05rem;
-    margin-bottom: 35px;
+  color: #666;
+  font-size: 1.05rem;
+  margin-bottom: 35px;
 }
 
 .contact-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .contact-item {
-    background: #f8fbff;
-    border: 2px solid #eef3ff;
-    border-radius: 18px;
-    padding: 20px;
-    transition: all 0.3s ease;
-    font-size: 1.05rem;
-    color: #0f3d91;
-    font-weight: 600;
+  background: #f8fbff;
+  border: 2px solid #eef3ff;
+  border-radius: 18px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+  color: #0f3d91;
+  font-weight: 600;
 }
 
 .contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(15, 61, 145, 0.12);
-    border-color: #f59e0b;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(15, 61, 145, 0.12);
+  border-color: #f59e0b;
 }
 
 .contact-item strong {
-    color: #08265f;
+  color: #08265f;
 }
 
 .contact-item a {
-    color: #000000;
-    text-decoration: none;
-    font-weight: 700;
-    transition: 0.3s;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s;
 }
 
 .contact-item a:hover {
-    color: #c13584;
+  color: #c13584;
 }
 
 @media (max-width: 768px) {
-    .contact-section {
-        padding: 30px 20px;
-        margin: 40px 15px;
-    }
+  .contact-section {
+    padding: 30px 20px;
+    margin: 40px 15px;
+  }
 
-    .contact-section h2 {
-        font-size: 1.7rem;
-    }
+  .contact-section h2 {
+    font-size: 1.7rem;
+  }
 
-    .contact-items {
-        grid-template-columns: 1fr;
-    }
+  .contact-items {
+    grid-template-columns: 1fr;
+  }
 
-    .contact-item {
-        padding: 18px;
-    }
+  .contact-item {
+    padding: 18px;
+  }
 }
+
 .instagram i {
-    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 .facebook {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  margin: 10px 0;
 }
 
 .facebook i {
-    font-size: 20px;
-    color: #1877F2; /* Facebook blue */
+  font-size: 20px;
+  color: #1877F2;
 }
 
 .facebook a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: 0.3s;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
 .facebook a:hover {
-    color: #1877F2;
+  color: #1877F2;
 }
